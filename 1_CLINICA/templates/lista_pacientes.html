@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pacientes</title>
+    </head>
+
+    <body>
+        <nav>
+              
+            <form action="/" method="POST">
+                <button>Clínicas</button>
+            </form>
+
+            <form action="/dentistas" method="POST">
+                <button>Dentistas</button>
+            </form>
+
+            <form action="/pacientes" method="POST">
+                <button>Pacientes</button>
+            </form>
+
+            <form action="/consultas" method="POST">
+                <button>Consultas</button>
+            </form>
+
+            <form action="/relatorios" method="POST">
+                <button>Relatórios</button>
+            </form>
+
+        </nav>      
+    
+        <h1>Pacientes</h1></h>
+
+        <form action="cadastrarpaciente" method="POST">
+            <button>Cadastrar Paciente</button>
+        </form>
+                   
+        <br>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Logradouro</th>
+                    <th>Complemento</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>CEP</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+                        
+            <tr><td></td></tr>
+                {% for item in dataspacientes %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td>{{item[4]}}</td>
+                <td>{{item[5]}}</td>
+                <td>{{item[6]}}</td>
+                <td>{{item[7]}}</td>
+                <td>{{item[8]}}</td>
+                <td>{{item[9]}}</td>
+                <td> <a href="/deletarpaciente/{{ item[0] }}" onclick="return confirm"("Você tem certeza que deseja deletar este paciente?")>Deletar</a></td>          
+               
+            </tr>
+                {% endfor %}
+         </table>
+
+    </body>
+</html>
+

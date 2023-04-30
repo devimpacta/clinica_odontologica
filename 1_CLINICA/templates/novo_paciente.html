@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastrar Novo Paciente</title>
+    </head>
+
+    <body>
+        <nav>
+
+            <form action="/" method="POST">
+                <button>Clínicas</button>
+            </form>
+
+            <form action="/dentistas" method="POST">
+                <button>Dentistas</button>
+            </form>
+
+            <form action="/pacientes" method="POST">
+                <button>Pacientes</button>
+            </form>
+
+            <form action="/consultas" method="POST">
+                <button>Consultas</button>
+            </form>
+
+            <form action="/relatorios" method="POST">
+                <button>Relatórios</button>
+            </form>
+
+        </nav>       
+        
+        <h1> Cadastrar Paciente</h1></h>
+      
+        <p>Para efetuar o cadastro de um novo paciente preencha todos os campos abaixo:</p>
+        
+        <br>
+
+        <form action="gravarpaciente" method="POST">
+            <fieldset>
+                <div>
+                    <label>Nome:</label>
+                    <input type="text" name="nome" id="nome" required/>
+                </div>
+            
+                <div>
+                    <label>CPF:</label>
+                    <input type="text" name="cpf" id="cpf" required/>
+                </div>
+                
+                <div>
+                    <label>Logradouro:</label>
+                    <input type="text" name="logradouro" id="logradouro" required/>
+                </div>       
+            
+                <div>   
+                    <label>Complemento:</label>
+                    <input type="text" name="complemento" id="complemento" required/>
+                </div>
+            
+                <div>
+                    <label>Bairro:</label>
+                    <input type="text" name="bairro" id="bairro" required/>
+                </div>
+            
+                <div>
+                    <label>Cidade:</label>
+                    <input type="text" name="cidade" id="cidade" required/>
+                </div>
+
+                <div>
+                    <label>Estado:</label>
+                    <input type="text" name="estado" id="estado" required/>
+                </div>
+                
+                <div>
+                    <label>CEP:</label>
+                    <input type="text" name="cep" id="cep" required/>
+                </div>
+
+                <div>
+                    <label>E-mail:</label>
+                    <input type="email" name="email" id="email" required/>
+                </div>
+
+                <div>
+                    <label>Telefone:</label>
+                    <input type="tel" name="telefone" id="telefone" required/>
+                </div>
+                           
+                <br>
+
+                <div>
+                    <input type="submit" id="botao_azul" value="Enviar"/>
+                </div>
+                            
+            </fieldset>
+
+            <br>
+
+                       
+            <div id="msg" name="'msg">
+                <table>
+                    <tr>
+                        <td>{{msg}}</td>
+                    </tr>
+                </table>
+            </div>  
+        </form>
+
+        <br>
+
+        <form action="/retornarpaciente" method="POST">
+            <button>Voltar</button>
+        </form>
+
+    </body>
+</html>
+
