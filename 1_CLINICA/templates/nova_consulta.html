@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-    <head>
+    </head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,62 +35,47 @@
                 </form>
             </nav>
            
-            <h2>Cadastrar Novo Paciente</h2>     
+            <h2>Cadastrar Nova Consulta</h2>     
                  
-            <p>Para efetuar o cadastro de um novo paciente preencha todos os campos abaixo:</p>
-
-            <form action="gravarpaciente" method="POST">
+            <p>Para efetuar o cadastro de uma nova consulta preencha todos os campos abaixo:</p>
+        
+            <form action="gravarconsulta" method="POST">
                 <fieldset class="modal-form">
                     <div>
-                        <label>Nome:</label>
-                        <input type="text" name="nomepaciente" id="nomepaciente" required/>
+                        <label>Dada da consulta:</label>
+                        <input type="text" name="dataconsulta" id="dataconsulta" required/>
                     </div>
             
                     <div>
-                        <label>CPF:</label>
-                        <input type="text" name="cpf" id="cpf" required/>
+                        <label>Horário da consulta:</label>
+                        <input type="text" name="horarioconsulta" id="horarioconsulta" required/>
                     </div>
                 
                     <div>
-                        <label>Logradouro:</label>
-                        <input type="text" name="logradouro" id="logradouro" required/>
+                        <label>Atividades realizadas:</label>
+                        <input type="text" name="atividades" id="atividades" required/>
                     </div>       
             
                     <div>   
-                        <label>Complemento:</label>
-                        <input type="text" name="complemento" id="complemento" required/>
+                        <label>Observações:</label>
+                        <input type="text" name="observacoes" id="observacoes" required/>
                     </div>
             
                     <div>
-                        <label>Bairro:</label>
-                        <input type="text" name="bairro" id="bairro" required/>
+                        <label>Razao social da clínica: Bairro:</label>
+                        <input type="text" name="razaosocial" id="razaosocial" required/>
                     </div>
             
                     <div>
-                        <label>Cidade:</label>
-                        <input type="text" name="cidade" id="cidade" required/>
+                        <label>Nome do dentista:</label>
+                        <input type="text" name="nomedentista" id="nomedentista" required/>
                     </div>
 
                     <div>
-                        <label>Estado:</label>
-                        <input type="text" name="estado" id="estado" required/>
+                        <label>Nome do paciente:</label>
+                        <input type="text" name="nomepaciente" id="nomepaciente" required/>
                     </div>
-                
-                    <div>
-                        <label>CEP:</label>
-                        <input type="text" name="cep" id="cep" required/>
-                    </div>
-
-                    <div>
-                        <label>E-mail:</label>
-                        <input type="email" name="email" id="email" required/>
-                    </div>
-
-                    <div>
-                        <label>Telefone:</label>
-                        <input type="tel" name="telefone" id="telefone" required/>
-                    </div>
-                           
+                    
                     <div>
                         <input type="submit" class="form-submit-button" value="Enviar"/>
                     </div>
@@ -108,7 +93,7 @@
             </div>  
            
             <nav>
-                <form action="/retornarpaciente" method="POST">
+                <form action="/retornarconsulta" method="POST">
                     <button class="voltar">Voltar</button>
                 </form>
             </nav>

@@ -1,1 +1,77 @@
-<p> teste com consultas</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='main.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='button.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='modal.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='records.css')}}">
+    </head>
+
+    <body>
+        
+        <header>
+            <h1 class="header-title">SISTEMA DE CLÍNICAS</h1>
+        </header>
+        
+        <main>
+            <nav>             
+                <form action="/" method="POST">
+                    <button class="button blue mobile">Clínicas</button>
+                </form>
+
+                <form action="/dentistas" method="POST">
+                    <button class="button blue mobile">Dentistas</button>
+                </form>
+
+                <form action="/pacientes" method="POST">
+                    <button class="button blue mobile">Pacientes</button>
+                </form>
+
+                <form action="/consultas" method="POST">
+                    <button class="button blue mobile">Consultas</button>
+                </form>   
+            </nav>
+
+            <h2>Consultas Cadastradas</h2> 
+      
+            <table class="records">
+                <thead>
+                    <tr>
+                        <th>Data da consulta</th>
+                        <th>Horário da consulta </th>
+                        <th>Atividades</th>
+                        <th>Observações</th>
+                        <th>Razão Social</th>
+                        <th>Nome Dentista</th>
+                        <th>Nome Paciente</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                        
+                <tr><td></td></tr>
+                    {% for item in datasconsultas %}
+                <tr>
+                    <td>{{item[0]}}</td>
+                    <td>{{item[1]}}</td>
+                    <td>{{item[2]}}</td>
+                    <td>{{item[3]}}</td>
+                    <td>{{item[4]}}</td>
+                    <td>{{item[5]}}</td>
+                    <td>{{item[6]}}</td>
+                    <td> <a href="/deletarconsulta/{{ item[0] }}">Deletar</a></td>          
+               
+                </tr>
+                  {% endfor %}
+            </table>
+
+            <form action="/cadastrarconsulta" method="POST">
+                <button class="button green">Cadastrar Nova Consulta</button>
+            </form>
+        </main>
+    </body>
+</html>
+

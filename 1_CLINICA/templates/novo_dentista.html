@@ -5,114 +5,110 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastrar Novo Dentista</title>
+        <link rel="stylesheet" href="{{ url_for ('static', filename='main.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='button.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='modal.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='records.css')}}">
     </head>
 
     <body>
-        <nav>
+        <header>
+            <h1 class="header-title">SISTEMA DE CLÍNICAS</h1>
+        </header>
 
-            <form action="/" method="POST">
-                <button>Clínicas</button>
-            </form>
+        <main>      
+            <nav>             
+                <form action="/" method="POST">
+                    <button class="button blue mobile">Clínicas</button>
+                </form>
 
-            <form action="/dentistas" method="POST">
-                <button>Dentistas</button>
-            </form>
+                <form action="/dentistas" method="POST">
+                    <button class="button blue mobile">Dentistas</button>
+                </form>
 
-            <form action="/pacientes" method="POST">
-                <button>Pacientes</button>
-            </form>
+                <form action="/pacientes" method="POST">
+                    <button class="button blue mobile">Pacientes</button>
+                </form>
 
-            <form action="/consultas" method="POST">
-                <button>Consultas</button>
-            </form>
-
-            <form action="/relatorios" method="POST">
-                <button>Relatórios</button>
-            </form>
-
-        </nav>       
-        
-        <h1> Cadastrar Dentista</h1></h>
-       
-        <p>Para efetuar o cadastro de um novo dentista preencha todos os campos abaixo:</p>
-       
-        <br>
-
-        <form action="gravardentista" method="POST">
-            <fieldset>
-                <div>
-                    <label>Nome:</label>
-                    <input type="text" name="nome" id="nome" required/>
-                </div>
+                <form action="/consultas" method="POST">
+                    <button class="button blue mobile">Consultas</button>
+                </form>
+            </nav>
+           
+            <h2>Cadastrar Novo Dentista</h2>     
+                 
+            <p>Para efetuar o cadastro de um novo dentista preencha todos os campos abaixo:</p>
+          
+            <form action="gravardentista" method="POST">
+                <fieldset class="modal-form">
+                    <div>
+                        <label>Nome:</label>
+                        <input type="text" name="nomedentista" id="nomedentista" required/>
+                    </div>
             
-                <div>
-                    <label>CPF:</label>
-                    <input type="text" name="cpf" id="cpf" required/>
-                </div>
+                    <div>
+                        <label>CPF:</label>
+                        <input type="text" name="cpf" id="cpf" required/>
+                    </div>
                 
-                <div>
-                    <label>Logradouro:</label>
-                    <input type="text" name="logradouro" id="logradouro" required/>
-                </div>       
+                    <div>
+                        <label>Logradouro:</label>
+                        <input type="text" name="logradouro" id="logradouro" required/>
+                   </div>       
             
-                <div>   
-                    <label>Complemento:</label>
-                    <input type="text" name="complemento" id="complemento" required/>
-                </div>
+                    <div>   
+                        <label>Complemento:</label>
+                        <input type="text" name="complemento" id="complemento" required/>
+                    </div>
             
-                <div>
-                    <label>Bairro:</label>
-                    <input type="text" name="bairro" id="bairro" required/>
-                </div>
+                    <div>
+                        <label>Bairro:</label>
+                        <input type="text" name="bairro" id="bairro" required/>
+                    </div>
             
-                <div>
-                    <label>Cidade:</label>
-                    <input type="text" name="cidade" id="cidade" required/>
-                </div>
+                    <div>
+                        <label>Cidade:</label>
+                        <input type="text" name="cidade" id="cidade" required/>
+                    </div>
 
-                <div>
-                    <label>Estado:</label>
-                    <input type="text" name="estado" id="estado" required/>
-                </div>
+                    <div>
+                        <label>Estado:</label>
+                        <input type="text" name="estado" id="estado" required/>
+                    </div>
                 
-                <div>
-                    <label>CEP:</label>
-                    <input type="text" name="cep" id="cep" required/>
-                </div>
+                    <div>
+                        <label>CEP:</label>
+                        <input type="text" name="cep" id="cep" required/>
+                    </div>
 
-                <div>
-                    <label>E-mail:</label>
-                    <input type="email" name="email" id="email" required/>
-                </div>
+                    <div>
+                        <label>E-mail:</label>
+                        <input type="email" name="email" id="email" required/>
+                    </div>
 
-                <div>
-                    <label>Telefone:</label>
-                    <input type="tel" name="telefone" id="telefone" required/>
-                </div>
+                    <div>
+                        <label>Telefone:</label>
+                        <input type="tel" name="telefone" id="telefone" required/>
+                    </div>
             
-                <div>
-                    <label>CRO:</label>
-                    <input type="text" name="cro" id="cro" required/>
-                </div>
+                    <div>
+                        <label>CRO:</label>
+                        <input type="text" name="cro" id="cro" required/>
+                    </div>
 
-                <div>
-                    <label>Especialidades:</label>
-                    <input type="text" name="especialidades" id="especialidades" required/>
-                </div>
+                    <div>
+                        <label>Especialidades:</label>
+                        <input type="text" name="especialidades" id="especialidades" required/>
+                    </div>
 
-                
-                <br>
-
-                <div>
-                    <input type="submit" id="botao_azul" value="Enviar"/>
-                </div>
+                    <div>
+                        <input type="submit" class="form-submit-button" value="Enviar"/>
+                    </div>
                             
-            </fieldset>
+                </fieldset>
+            </form>
 
-            <br>
-
-                       
+                                            
             <div id="msg" name="'msg">
                 <table>
                     <tr>
@@ -120,14 +116,13 @@
                     </tr>
                 </table>
             </div>  
-        </form>
-
-        <br>
-
-        <form action="/retornardentista" method="POST">
-            <button>Voltar</button>
-        </form>
-
+           
+            <nav>
+                <form action="/retornardentista" method="POST">
+                    <button class="voltar">Voltar</button>
+                </form>
+            </nav>
+        </main>
     </body>
 </html>
 

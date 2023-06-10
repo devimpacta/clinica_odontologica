@@ -22,7 +22,7 @@ mysql.init_app(app)
 def listar():
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('select razao_social, cnpj, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, responsavel_tecnico from tbl_clinicas')
+    cursor.execute('select razaosocial, cnpj, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, responsavel_tecnico from tbl_clinicas')
     data = cursor.fetchall()
     conn.commit()
     return render_template('lista_clinicas.html', datas=data)
@@ -32,7 +32,7 @@ def listar():
 def listardentista():
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('select nome, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, cro, especialidades from tbl_dentistas')
+    cursor.execute('select nomedentista, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, cro, especialidades from tbl_dentistas')
     data = cursor.fetchall()
     conn.commit()
     return render_template('lista_dentistas.html', datasdentistas=data)
@@ -41,14 +41,21 @@ def listardentista():
 def listarpacientes():
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('select nome, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone from tbl_pacientes')
+    cursor.execute('select nomepaciente, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone from tbl_pacientes')
     data = cursor.fetchall()
     conn.commit()
     return render_template('lista_pacientes.html', dataspacientes=data)
 
 @app.route("/consultas", methods=['POST','GET'])
-def consultas():
-    return render_template("lista_consultas.html")
+def listarconsultas():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute('select dataconsulta, horarioconsulta, atividades, observacoes, razaosocial, nomedentista, nomepaciente from tbl_consultas')
+    data = cursor.fetchall()
+    conn.commit()
+    return render_template("lista_consultas.html", datasconsultas=data)
+
+
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +71,7 @@ def cadastrar():
 
 @app.route('/gravar', methods=['POST','GET'])
 def gravar():
-    razao_social = request.form['razao_social']
+    razaosocial = request.form['razaosocial']
     cnpj = request.form['cnpj']
     logradouro = request.form['logradouro']
     complemento = request.form['complemento']
@@ -76,10 +83,10 @@ def gravar():
     telefone = request.form['telefone']
     responsavel_tecnico = request.form['responsavel_tecnico']
 
-    if razao_social and cnpj and logradouro and complemento and bairro and cidade and estado and cep and email and telefone and responsavel_tecnico:
+    if razaosocial and cnpj and logradouro and complemento and bairro and cidade and estado and cep and email and telefone and responsavel_tecnico:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute('insert into tbl_clinicas (razao_social, cnpj, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, responsavel_tecnico) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (razao_social, cnpj, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, responsavel_tecnico))
+        cursor.execute('insert into tbl_clinicas (razaosocial, cnpj, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, responsavel_tecnico) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (razaosocial, cnpj, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, responsavel_tecnico))
         conn.commit()
     return render_template('nova_clinica.html', msg='Dados gravados com sucesso. Desejar cadastrar mais uma Clínica? Preencha o formulário acima novamente.')
 
@@ -89,19 +96,19 @@ def gravar():
 def retornar():
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('select razao_social, cnpj, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, responsavel_tecnico from tbl_clinicas')
+    cursor.execute('select razaosocial, cnpj, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, responsavel_tecnico from tbl_clinicas')
     data = cursor.fetchall()
     conn.commit()
     return render_template('lista_clinicas.html', datas=data)
 
 # ROTA PARA PARA DELETAR UMA CLÍNICA
 
-@app.route("/deletar/<string:razao_social>")
-def deletar(razao_social):
+@app.route("/deletar/<string:razaosocial>")
+def deletar(razaosocial):
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM tbl_clinicas WHERE razao_social=%s", (razao_social,))
+        cursor.execute("DELETE FROM tbl_clinicas WHERE razaosocial=%s", (razaosocial,))
         conn.commit()
         return redirect('/')  
     except:
@@ -122,7 +129,7 @@ def cadastrar_dentista():
 
 @app.route('/gravardentista', methods=['POST','GET'])
 def gravar_dentista():
-    nome = request.form['nome']
+    nomedentista = request.form['nomedentista']
     cpf = request.form['cpf']
     logradouro = request.form['logradouro']
     complemento = request.form['complemento']
@@ -135,10 +142,10 @@ def gravar_dentista():
     cro = request.form['cro']
     especialidades = request.form['especialidades']
     
-    if nome and cpf and logradouro and complemento and bairro and cidade and estado and cep and email and telefone and cro and especialidades:
+    if nomedentista and cpf and logradouro and complemento and bairro and cidade and estado and cep and email and telefone and cro and especialidades:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute('insert into tbl_dentistas (nome, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, cro, especialidades) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (nome, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, cro, especialidades))
+        cursor.execute('insert into tbl_dentistas (nomedentista, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, cro, especialidades) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (nomedentista, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, cro, especialidades))
         conn.commit()
     return render_template('novo_dentista.html', msg='Dados gravados com sucesso. Desejar cadastrar mais um Dentista? Preencha o formulário acima novamente.')
 
@@ -148,19 +155,19 @@ def gravar_dentista():
 def retornar_dentista():
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('select nome, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, cro, especialidades from tbl_dentistas')
+    cursor.execute('select nomedentista, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone, cro, especialidades from tbl_dentistas')
     data = cursor.fetchall()
     conn.commit()
     return render_template('lista_dentistas.html', datasdentistas=data)
 
 # ROTA PARA PARA DELETAR UM DENTISTA
 
-@app.route("/deletardentista/<string:nome>")
-def deletardentista(nome):
+@app.route("/deletardentista/<string:nomedentista>")
+def deletardentista(nomedentista):
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM tbl_dentistas WHERE nome=%s", (nome,))
+        cursor.execute("DELETE FROM tbl_dentistas WHERE nomedentista=%s", (nomedentista,))
         conn.commit()
         return redirect('/dentistas')  
     except:
@@ -180,7 +187,7 @@ def cadastrar_pacientes():
 
 @app.route('/gravarpaciente', methods=['POST','GET'])
 def gravar_paciente():
-    nome = request.form['nome']
+    nomepaciente = request.form['nomepaciente']
     cpf = request.form['cpf']
     logradouro = request.form['logradouro']
     complemento = request.form['complemento']
@@ -191,10 +198,10 @@ def gravar_paciente():
     email = request.form['email']
     telefone = request.form['telefone']
     
-    if nome and cpf and logradouro and complemento and bairro and cidade and estado and cep and email and telefone:
+    if nomepaciente and cpf and logradouro and complemento and bairro and cidade and estado and cep and email and telefone:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute('insert into tbl_pacientes (nome, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (nome, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone))
+        cursor.execute('insert into tbl_pacientes (nomepaciente, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (nomepaciente, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone))
         conn.commit()
     return render_template('novo_paciente.html', msg='Dados gravados com sucesso. Desejar cadastrar mais um paciente? Preencha o formulário acima novamente.')
 
@@ -204,23 +211,77 @@ def gravar_paciente():
 def retornar_paciente():
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('select nome, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone from tbl_pacientes')
+    cursor.execute('select nomepaciente, cpf, logradouro, complemento, bairro, cidade, estado, cep, email, telefone from tbl_pacientes')
     data = cursor.fetchall()
     conn.commit()
     return render_template('lista_pacientes.html', dataspacientes=data)
 
 # ROTA PARA PARA DELETAR UM PACIENTE
 
-@app.route("/deletarpaciente/<string:nome>")
-def deletarpaciente(nome):
+@app.route("/deletarpaciente/<string:nomepaciente>")
+def deletarpaciente(nomepaciente):
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM tbl_pacientes WHERE nome=%s", (nome,))
+        cursor.execute("DELETE FROM tbl_pacientes WHERE nomepaciente=%s", (nomepaciente,))
         conn.commit()
         return redirect('/pacientes')  
     except:
         return "Desculpe. Algo deu errado. Contacte o administrador do sistema"
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# ROTAS CONSULTAS
+
+# ROTA PARA CADASTRAR CONSULTAS
+
+@app.route("/cadastrarconsulta", methods=["POST"])
+def cadastrar_consultas():
+    return render_template("nova_consulta.html")
+
+# ROTA PARA GRAVAR CONSULTA
+
+@app.route('/gravarconsulta', methods=['POST','GET'])
+def gravar_consulta():
+    dataconsulta = request.form['dataconsulta']
+    horarioconsulta = request.form['horarioconsulta']
+    atividades = request.form['atividades']
+    observacoes = request.form['observacoes']
+    razaosocial = request.form['razaosocial']
+    nomedentista = request.form['nomedentista']
+    nomepaciente = request.form['nomepaciente']
+    
+    if dataconsulta and horarioconsulta and atividades and observacoes and razaosocial and nomedentista and nomepaciente:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute('insert into tbl_consultas (dataconsulta, horarioconsulta, atividades, observacoes, razaosocial, nomedentista, nomepaciente) VALUES (%s, %s, %s, %s, %s, %s, %s)', (dataconsulta, horarioconsulta, atividades, observacoes, razaosocial, nomedentista, nomepaciente))
+        conn.commit()
+    return render_template('nova_consulta.html', msg='Dados gravados com sucesso. Desejar cadastrar mais uma consulta? Preencha o formulário acima novamente.')
+
+# ROTA PARA RETORNAR DA PÁGINA GRAVAR CONSULTAS
+
+@app.route("/retornarconsulta", methods=['POST','GET'])
+def retornar_consulta():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute('select dataconsulta, horarioconsulta, atividades, observacoes, razaosocial, nomedentista, nomepaciente from tbl_consultas')
+    data = cursor.fetchall()
+    conn.commit()
+    return render_template('lista_consultas.html', datasconsultas=data)
+
+# ROTA PARA PARA DELETAR UMA CONSULTA
+
+@app.route("/deletarconsulta/<string:dataconsulta>")
+def deletarconsulta(dataconsulta):
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM tbl_consultas WHERE dataconsulta=%s", (dataconsulta,))
+        conn.commit()
+        return redirect('/consultas')  
+    except:
+        return "Desculpe. Algo deu errado. Contacte o administrador do sistema"
+
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

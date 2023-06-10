@@ -5,81 +5,88 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Clínicas</title>
+        <link rel="stylesheet" href="{{ url_for ('static', filename='main.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='button.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='modal.css')}}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='records.css')}}">
     </head>
 
     <body>
-        <nav>
-              
-            <form action="/" method="POST">
-                <button>Clínicas</button>
-            </form>
+        <header>
+            <h1 class="header-title">SISTEMA DE CLÍNICAS</h1>
+        </header>
 
-            <form action="/dentistas" method="POST">
-                <button>Dentistas</button>
-            </form>
+        <main>      
+            <nav>             
+                <form action="/" method="POST">
+                    <button class="button blue mobile">Clínicas</button>
+                </form>
 
-            <form action="/pacientes" method="POST">
-                <button>Pacientes</button>
-            </form>
+                <form action="/dentistas" method="POST">
+                    <button class="button blue mobile">Dentistas</button>
+                </form>
 
-            <form action="/consultas" method="POST">
-                <button>Consultas</button>
-            </form>
+                <form action="/pacientes" method="POST">
+                    <button class="button blue mobile">Pacientes</button>
+                </form>
 
-            <form action="/relatorios" method="POST">
-                <button>Relatórios</button>
-            </form>
-
-        </nav>      
-    
-        <h1>Clínicas</h1></h>
-
-        <form action="/cadastrar" method="POST">
-            <button>Cadastrar Clínica</button>
-        </form>
-                   
-        <br>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Razão Social</th>
-                    <th>CNPJ</th>
-                    <th>Logradouro</th>
-                    <th>Complemento</th>
-                    <th>Bairro</th>
-                    <th>Cidade</th>
-                    <th>Estado</th>
-                    <th>CEP</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                    <th>Responsável Técnico</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-                        
-            <tr><td></td></tr>
-                {% for item in datas %}
-            <tr>
-                <td>{{item[0]}}</td>
-                <td>{{item[1]}}</td>
-                <td>{{item[2]}}</td>
-                <td>{{item[3]}}</td>
-                <td>{{item[4]}}</td>
-                <td>{{item[5]}}</td>
-                <td>{{item[6]}}</td>
-                <td>{{item[7]}}</td>
-                <td>{{item[8]}}</td>
-                <td>{{item[9]}}</td>
-                <td>{{item[10]}}</td>
-                <td>{{item[11]}}</td>
-                <td> <a href="/deletar/{{ item[0] }}" onclick="return confirm"("Você tem certeza que deseja deletar esta clínica?")>Deletar</a></td>          
+                <form action="/consultas" method="POST">
+                    <button class="button blue mobile">Consultas</button>
+                </form>
                
-            </tr>
-                {% endfor %}
-         </table>
+            </nav>
+           
+            <h2>Clínicas Cadastradas</h2> 
+              
+            <table class="records">
+                <thead>
+                    <tr>
+                        <th>Razão Social</th>
+                        <th>CNPJ</th>
+                        <th>Logradouro</th>
+                        <th>Complemento</th>
+                        <th>Bairro</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                        <th>CEP</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Responsável Técnico</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                        
+                <tr>
+                    <td>
+                        {% for item in datas %}
+                    </td>
+                </tr>   
 
+
+                <tr>
+                    <td>{{item[0]}}</td>
+                    <td>{{item[1]}}</td>
+                    <td>{{item[2]}}</td>
+                    <td>{{item[3]}}</td>
+                    <td>{{item[4]}}</td>
+                    <td>{{item[5]}}</td>
+                    <td>{{item[6]}}</td>
+                    <td>{{item[7]}}</td>
+                    <td>{{item[8]}}</td>
+                    <td>{{item[9]}}</td>
+                    <td>{{item[10]}}</td>
+                    <td> <a href="/deletar/{{ item[0] }}">Deletar</a></td>          
+                </tr>
+                    {% endfor %}
+            </table>
+
+            <nav>
+                <form action="/cadastrar" method="POST">
+                    <button class="button green">Cadastrar Nova Clínica</button>
+                </form>
+            </nav> 
+
+        </main>
     </body>
 </html>
 
